@@ -22,6 +22,9 @@ To return to screen:
 ```bash
 screen -r "Docker Redis"
 ```  
-You can access Redis on `redis://password@172.17.0.2:6379`
+Test if redis is open:  
+```bash
+redis-cli -u redis://generatedPassword@172.17.0.2:6379 ping
+```
 
 ----
