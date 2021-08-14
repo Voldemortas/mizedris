@@ -1,0 +1,65 @@
+@use 'sass:math';
+
+$suits: (
+  'Spades': -30px,
+  'Hearts': -600px,
+  'Diamonds': -1170px,
+  'Clovers': -1740px,
+);
+$ranks: (
+  'Ace': -30px,
+  'Nine': -3150px,
+  'Ten': -3540px,
+  'Jack': -3930px,
+  'Queen': -4320px,
+  'King': -4710px,
+);
+
+@mixin rankOfsuits($rankName, $rankPx, $suitsName, $suitsPx) {
+  .#{$rankName}of#{$suitsName} {
+    background: url('../../public/playing_cards.svg') $rankPx $suitsPx;
+    height: 540px;
+    width: 360px;
+    position: relative;
+    transform: scale(0.5);
+    margin: -135px -90px;
+  }
+}
+
+@each $rankName, $rankPx in $ranks {
+  @each $suitsName, $suitsPx in $suits {
+    @include rankOfsuits($rankName, $rankPx, $suitsName, $suitsPx);
+  }
+}
+
+.card {
+  width: 180px;
+  height: 270px;
+  margin: 5px;
+  display: inline-block;
+  border-radius: 20px;
+  &:hover {
+    box-shadow: 0 10px 16px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 20%);
+    cursor: pointer;
+  }
+}
+
+.cardContainer {
+  margin: 10px;
+  max-width: 1600px;
+}
+
+.cardBack {
+  background: url('../../public/card_back.svg') 0 0;
+  height: 359px;
+  width: 247px;
+  $Y: #{math.div(270, 359)};
+  $X: #{math.div(180, 247)};
+  $Y2: #{math.div(270 - 359, 2)}px;
+  $X2: #{math.div(180 - 247, 2)}px;
+  position: relative;
+  transform: scaleY($Y) scaleX($X);
+  margin: $X2 $Y2;
+  top: -11px;
+  left: 11px;
+}
